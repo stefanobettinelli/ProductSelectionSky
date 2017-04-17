@@ -16,7 +16,7 @@ public class SimpleCustomerTest {
     @Before
     public void setUp() throws InvalidSkyIdException {
         Location location = new SimpleLocation(IntegerSkyId.getNewId(10), "Zanzibar");
-        testingCustomer = new SimpleCustomer(IntegerSkyId.getNewId(10),location);
+        testingCustomer = new SimpleCustomer("Mario", IntegerSkyId.getNewId(10), location);
         Category catA = new SimpleCategory(IntegerSkyId.getNewId(1), "CatA");
         Category catB = new SimpleCategory(IntegerSkyId.getNewId(2), "CatB");
 
@@ -39,7 +39,7 @@ public class SimpleCustomerTest {
     }
 
     @Test
-    public void getCategoriesOfSelectedProducts(){
+    public void getCategoriesOfSelectedProducts() {
         addThreeProducts();
         assertEquals(2, testingCustomer.getCategoriesOfSelectedProducts().size());
     }

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StaticCustomerDAO implements entityDAO{
+public class StaticCustomerDAO implements entityDAO {
 
     public final static SkyId MARIO_ID = IntegerSkyId.getNewId(1);
     public final static SkyId LUIGI_ID = IntegerSkyId.getNewId(2);
@@ -18,19 +18,19 @@ public class StaticCustomerDAO implements entityDAO{
     static {
         Location londonLocation = StaticLocationDAO.getLocationById(StaticLocationDAO.LONDON_LOCATION_ID);
         Location liverpoolLocation = StaticLocationDAO.getLocationById(StaticLocationDAO.LIVERPOOL_LOCATION_ID);
-        Customer mario = new SimpleCustomer(MARIO_ID, londonLocation);
-        Customer luigi = new SimpleCustomer(LUIGI_ID, londonLocation);
-        Customer zelda = new SimpleCustomer(ZELDA_ID, liverpoolLocation);
+        Customer mario = new SimpleCustomer("Mario", MARIO_ID, londonLocation);
+        Customer luigi = new SimpleCustomer("Luigi", LUIGI_ID, londonLocation);
+        Customer zelda = new SimpleCustomer("Zelda", ZELDA_ID, liverpoolLocation);
         CUSTOMER_MAP.putIfAbsent(mario.getID(), mario);
         CUSTOMER_MAP.putIfAbsent(luigi.getID(), luigi);
         CUSTOMER_MAP.putIfAbsent(zelda.getID(), zelda);
     }
 
-    public static List<Customer> getCustomers(){
+    public static List<Customer> getCustomers() {
         return new ArrayList<>(CUSTOMER_MAP.values());
     }
 
-    public static Customer getCustomerById(SkyId customerID){
+    public static Customer getCustomerById(SkyId customerID) {
         return CUSTOMER_MAP.get(customerID);
     }
 

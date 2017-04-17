@@ -9,12 +9,15 @@ public class SimpleCustomer implements Customer {
     private Location location;
     private Map<SkyId, Product> selectedProducts;
 
-    public SimpleCustomer(SkyId customerID, Location location) {
-        this(customerID, location, null);
+    private String name;
+
+    public SimpleCustomer(String name, SkyId customerID, Location location) {
+        this(name, customerID, location, null);
         selectedProducts = new HashMap<>();
     }
 
-    public SimpleCustomer(SkyId customerID, Location location, Map<SkyId, Product> selectedProducts) {
+    public SimpleCustomer(String name, SkyId customerID, Location location, Map<SkyId, Product> selectedProducts) {
+        this.name = name;
         this.customerID = customerID;
         this.location = location;
         this.selectedProducts = selectedProducts;
@@ -38,21 +41,6 @@ public class SimpleCustomer implements Customer {
 
     private void updatePurchasedProducts() {
 
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SimpleCustomer that = (SimpleCustomer) o;
-        return customerID == that.customerID &&
-                location == that.location &&
-                Objects.equals(selectedProducts, that.selectedProducts);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(customerID, location, selectedProducts);
     }
 
     public SkyId getID() {
@@ -80,6 +68,22 @@ public class SimpleCustomer implements Customer {
         }
 
         return new ArrayList<>(categoryMap.values());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SimpleCustomer that = (SimpleCustomer) o;
+        return Objects.equals(customerID, that.customerID) &&
+                Objects.equals(location, that.location) &&
+                Objects.equals(selectedProducts, that.selectedProducts) &&
+                Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerID, location, selectedProducts, name);
     }
 
 }

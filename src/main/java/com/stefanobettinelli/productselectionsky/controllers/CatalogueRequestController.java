@@ -6,6 +6,8 @@ import com.stefanobettinelli.productselectionsky.exceptions.InvalidSkyIdExceptio
 import com.stefanobettinelli.productselectionsky.model.Catalogue;
 import com.stefanobettinelli.productselectionsky.model.IntegerSkyId;
 import com.stefanobettinelli.productselectionsky.services.CatalogueRetrievalService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CatalogueRequestController {
 
+    private static final Logger Log = LoggerFactory.getLogger(CustomerLocationRequestController.class);
+
     @Autowired
     CatalogueRetrievalService catalogueRetrievalService;
 
     @RequestMapping(value = "/catalogue/{locationID}")
     public Catalogue getCatalogInLocation(@PathVariable String locationID) throws InvalidCatalogueIdException {
+
+        Log.info("Request for location by customer with ID [{}]", locationID);
 
         Catalogue catalogue = null;
 
