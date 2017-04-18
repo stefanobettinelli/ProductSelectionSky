@@ -1,4 +1,5 @@
-var availableProducts;
+var availableProducts = null;
+var currentUserId = null;
 
 var requestCatalogue = function (locationID) {
     console.log("Requesting cataloge for locationID", locationID);
@@ -21,12 +22,13 @@ $("#getProductsButton").click(function (e) {
     $("#basket").empty();
 
     var name = $("#nameField").val();
-    var customerID = null;
-    var nameToIdDict = {"Mario": 1, "Luigi": 2, "Zelda": 3}
+    var customerID;
+    var nameToIdDict = {"Mario": 1, "Luigi": 2, "Zelda": 3};
     customerID = nameToIdDict[name];
+    currentUserId = customerID;
 
     //send location request if id not null
-    if (customerID != null) {
+    if (customerID !== null) {
         console.log("Sending location id request for user", name);
         $.ajax({
             url: 'http://localhost:8080/customer_locations/' + customerID,
@@ -42,6 +44,41 @@ $("#getProductsButton").click(function (e) {
     }
 });
 
+$(".checkout").click(function (e) {
+    console.log("currentUserId id", currentUserId);
+    e.preventDefault();
+
+    var selectedProducts = [];
+    $('#basket').find('li').each(function() {
+        var id = $(this).attr('id');
+        selectedProducts.push(id);
+    });
+
+    if(selectedProducts.length === 0){
+        console.log("No selected products...");
+        return;
+    }
+
+    console.log(JSON.stringify({ customerID: currentUserId,  selectedProducts: selectedProducts}));
+
+    $.ajax({
+        url: 'http://localhost:8080/checkout',
+        method: "POST",
+        data: JSON.stringify({ customerID: currentUserId,  selectedProducts: selectedProducts}),
+        contentType: 'application/json',
+        dataType: 'html',
+        success: function(response) {
+            console.log("Loading checkout page");
+            //$("html").html(response);
+            $("body").html(response);
+        },
+        error: function (xhr, status) {
+            console.log(status);
+        }
+    });
+
+});
+
 var sportProductHolder = document.getElementById("sports");
 var newsProductHolder = document.getElementById("news");
 var basketHolder = document.getElementById("basket");
@@ -53,26 +90,28 @@ var initializeLists = function () {
 
     for (i = 0; i < productNames.length; i++) {
         var catName = productNames[i].category.name.toLowerCase();
-        console.log(catName);
+        var prodId = productNames[i].id.id;
+        console.log(prodId);
         if (catName === "sports") {
-            $("#sports").append('<li class="sports"><input type="checkbox"><label>' + productNames[i].name + '</label><input type="text"> </li>');
+            $("#sports").append('<li id="' + prodId + '" class="sports"><input type="checkbox"><label>' + productNames[i].name + '</label></li>');
         } else if (catName === "news" || catName === "sport news") {
-            $("#news").append('<li class="news"><input type="checkbox"><label>' + productNames[i].name + '</label><input type="text"> </li>');
+            $("#news").append('<li id="' + prodId + '" class="news"><input type="checkbox"><label>' + productNames[i].name + '</label></li>');
         }
     }
 
+    var i = 0;
     // Cycle over the sportProductHolder ul list items
-    for (var i = 0; i < sportProductHolder.children.length; i++) {
+    for (i = 0; i < sportProductHolder.children.length; i++) {
         // bind events to list item's children (productSelected)
         bindProductEvent(sportProductHolder.children[i], productSelected);
     }
     // Cycle over the newsProductHolder ul list items
-    for (var i = 0; i < newsProductHolder.children.length; i++) {
+    for (i = 0; i < newsProductHolder.children.length; i++) {
         // bind events to list item's children (productSelected)
         bindProductEvent(newsProductHolder.children[i], productSelected);
     }
     // Cycle over the basketHolder ul list items
-    for (var i = 0; i < basketHolder.children.length; i++) {
+    for (i = 0; i < basketHolder.children.length; i++) {
         // bind events to list item's children (basket items)
         bindProductEvent(basketHolder.children[i], unselectProduct);
     }

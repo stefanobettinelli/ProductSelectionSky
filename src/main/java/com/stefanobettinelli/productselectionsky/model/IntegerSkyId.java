@@ -1,10 +1,15 @@
 package com.stefanobettinelli.productselectionsky.model;
 
+import com.stefanobettinelli.productselectionsky.controllers.CatalogueRequestController;
 import com.stefanobettinelli.productselectionsky.exceptions.InvalidSkyIdException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
 public class IntegerSkyId implements SkyId<Integer> {
+
+    private static final Logger Log = LoggerFactory.getLogger(IntegerSkyId.class);
 
     private Integer id;
 
@@ -16,11 +21,11 @@ public class IntegerSkyId implements SkyId<Integer> {
     }
 
     public static IntegerSkyId getNewId(Integer id){
-        IntegerSkyId integerSkyId = null;
+        IntegerSkyId integerSkyId;
         try {
             integerSkyId = new IntegerSkyId(id);
         } catch (InvalidSkyIdException e) {
-            e.printStackTrace();
+            Log.error("Invalid sky id, must >= 0.", e);
             return null; // TODO check this kind of stacktrace print
         }
         return integerSkyId;

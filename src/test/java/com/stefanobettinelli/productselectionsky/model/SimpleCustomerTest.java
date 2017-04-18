@@ -33,6 +33,11 @@ public class SimpleCustomerTest {
     }
 
     @Test
+    public void addProductsById(){
+        fail();
+    }
+
+    @Test
     public void addProduct() throws Exception {
         addThreeProducts();
         assertEquals(3, testingCustomer.getSelectedProducts().size());

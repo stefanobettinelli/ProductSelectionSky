@@ -17,10 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CatalogueRequestController {
 
-    private static final Logger Log = LoggerFactory.getLogger(CustomerLocationRequestController.class);
+    private static final Logger Log = LoggerFactory.getLogger(CatalogueRequestController.class);
+
+    private final CatalogueRetrievalService catalogueRetrievalService;
 
     @Autowired
-    CatalogueRetrievalService catalogueRetrievalService;
+    public CatalogueRequestController(CatalogueRetrievalService catalogueRetrievalService) {
+        this.catalogueRetrievalService = catalogueRetrievalService;
+    }
 
     @RequestMapping(value = "/catalogue/{locationID}")
     public Catalogue getCatalogInLocation(@PathVariable String locationID) throws InvalidCatalogueIdException {
@@ -34,7 +38,7 @@ public class CatalogueRequestController {
         } catch (NumberFormatException e) {
             throw new InvalidCatalogueIdException(String.format("Location id '%s' is not valid", locationID));
         } catch (CatalogueNotFoundException e) {
-            e.printStackTrace();
+            Log.error("No catalogue found.", e);
         }
 
         return catalogue;
@@ -48,7 +52,7 @@ public class CatalogueRequestController {
         try {
             catalogue = catalogueRetrievalService.getCompleteCatalogue();
         } catch (CatalogueNotFoundException e) {
-            e.printStackTrace();
+            Log.error("No catalogue found.", e);
         }
 
         return catalogue;

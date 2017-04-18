@@ -7,11 +7,12 @@ import java.util.Map;
  * Customer abstract concept
  */
 public interface Customer {
-    public SkyId getID();
-    public Location getLocation();
-    public Map<SkyId, Product> getSelectedProducts();
-    public List<Category> getCategoriesOfSelectedProducts();
-    public void addProduct(Product product);
-    public void removeProduct(Product product);
-    public void checkOut();
+    SkyId getID();
+    Location getLocation();
+    Map<SkyId, Product> getSelectedProducts();
+    List<Category> getCategoriesOfSelectedProducts();
+    void addProduct(Product product);
+    void addProductsById(List<SkyId> products);
+    void removeProduct(Product product);
+    String getName();
 }

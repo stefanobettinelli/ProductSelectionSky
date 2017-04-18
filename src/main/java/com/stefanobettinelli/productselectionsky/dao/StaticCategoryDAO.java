@@ -14,18 +14,18 @@ import java.util.Map;
 public class StaticCategoryDAO implements entityDAO{
 
     public final static SkyId NEWS_CAT_ID = IntegerSkyId.getNewId(1);
-    public final static SkyId SPORTS_CAT_ID = IntegerSkyId.getNewId(2);
-    public final static SkyId SPORTS_NEWS_CAT_ID = IntegerSkyId.getNewId(3);
+    final static SkyId SPORTS_CAT_ID = IntegerSkyId.getNewId(2);
+    final static SkyId SPORTS_NEWS_CAT_ID = IntegerSkyId.getNewId(3);
 
     private final static Map<SkyId, Category> CATEGORY_MAP = new HashMap<>();
 
     static {
-        CATEGORY_MAP.put(NEWS_CAT_ID, new SimpleCategory(NEWS_CAT_ID, "News"));
-        CATEGORY_MAP.put(SPORTS_CAT_ID, new SimpleCategory(SPORTS_CAT_ID, "Sports"));
-        CATEGORY_MAP.put(SPORTS_NEWS_CAT_ID, new SimpleCategory(SPORTS_NEWS_CAT_ID, "Sport News"));
+        CATEGORY_MAP.putIfAbsent(NEWS_CAT_ID, new SimpleCategory(NEWS_CAT_ID, "News"));
+        CATEGORY_MAP.putIfAbsent(SPORTS_CAT_ID, new SimpleCategory(SPORTS_CAT_ID, "Sports"));
+        CATEGORY_MAP.putIfAbsent(SPORTS_NEWS_CAT_ID, new SimpleCategory(SPORTS_NEWS_CAT_ID, "Sport News"));
     }
 
-    public static Map<SkyId, Category> getCategories(){
+    static Map<SkyId, Category> getCategories(){
         return CATEGORY_MAP;
     }
 

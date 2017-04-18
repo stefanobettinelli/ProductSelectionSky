@@ -6,11 +6,11 @@ import java.util.*;
 
 public class StaticCatalogueDAO implements entityDAO{
 
-    public final static SkyId ARSERNAL_TV_ID = IntegerSkyId.getNewId(1);
-    public final static SkyId CHELSEA_TV_ID = IntegerSkyId.getNewId(2);
-    public final static SkyId LIVERPOOL_TV_ID = IntegerSkyId.getNewId(3);
-    public final static SkyId SKY_NEWS_ID = IntegerSkyId.getNewId(4);
-    public final static SkyId SKY_SPORTS_ID = IntegerSkyId.getNewId(5);
+    private final static SkyId ARSERNAL_TV_ID = IntegerSkyId.getNewId(1);
+    private final static SkyId CHELSEA_TV_ID = IntegerSkyId.getNewId(2);
+    private final static SkyId LIVERPOOL_TV_ID = IntegerSkyId.getNewId(3);
+    private final static SkyId SKY_NEWS_ID = IntegerSkyId.getNewId(4);
+    private final static SkyId SKY_SPORTS_ID = IntegerSkyId.getNewId(5);
 
     private final static Map<SkyId, Product> PRODUCT_MAP = new HashMap<>();
     private final static Map<SkyId, Category> CATEGORY_MAP = StaticCategoryDAO.getCategories();
@@ -50,6 +50,10 @@ public class StaticCatalogueDAO implements entityDAO{
             products.add(PRODUCT_MAP.get(id));
         }
         return new SimpleCatalogue(products);
+    }
+
+    public static Product getProductById(SkyId productId){
+        return PRODUCT_MAP.get(productId);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.stefanobettinelli.productselectionsky.model;
 
 
+import com.stefanobettinelli.productselectionsky.dao.StaticCatalogueDAO;
+
 import java.util.*;
 
 public class SimpleCustomer implements Customer {
@@ -8,6 +10,10 @@ public class SimpleCustomer implements Customer {
     private SkyId customerID;
     private Location location;
     private Map<SkyId, Product> selectedProducts;
+
+    public String getName() {
+        return name;
+    }
 
     private String name;
 
@@ -29,14 +35,15 @@ public class SimpleCustomer implements Customer {
         selectedProducts.putIfAbsent(prodID, product);
     }
 
-    @Override
-    public void removeProduct(Product product) {
-        selectedProducts.remove(product.getID());
+    public void addProductsById(List<SkyId> products) {
+        for (SkyId productId : products) {
+            selectedProducts.putIfAbsent(productId, StaticCatalogueDAO.getProductById(productId));
+        }
     }
 
     @Override
-    public void checkOut() {
-
+    public void removeProduct(Product product) {
+        selectedProducts.remove(product.getID());
     }
 
     private void updatePurchasedProducts() {
@@ -59,8 +66,7 @@ public class SimpleCustomer implements Customer {
     public List<Category> getCategoriesOfSelectedProducts() {
         Map<SkyId, Category> categoryMap = new HashMap<>();
 
-        for (Map.Entry<SkyId, Product> entry : selectedProducts.entrySet())
-        {
+        for (Map.Entry<SkyId, Product> entry : selectedProducts.entrySet()) {
             Category cat = entry.getValue().getCategory();
             SkyId categoryId = cat.getId();
             categoryMap.putIfAbsent(categoryId, cat);

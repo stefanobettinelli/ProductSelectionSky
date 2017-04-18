@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sky Product Selection: checkout</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h3>Confirm select products</h3>
+    <div th:if="${not #lists.isEmpty(products)}">
+        <ul class="list-group">
+            <li class="list-group-item" th:each="product: ${products}" th:text="${product}"></li>
+        </ul>
+    </div>
+
+    <form action="http://localhost:8080/">
+        <input type="submit" onclick="return confirm('Are you sure?')" value="Confirm purchase"/>
+        <!--<a href="http://localhost:8080/" onclick="return confirm('Are you sure?')">Confirm purchase</a>-->
+    </form>
+</div>
+
+</body>
+</html>
