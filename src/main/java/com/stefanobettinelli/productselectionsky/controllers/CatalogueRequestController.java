@@ -1,3 +1,9 @@
+/***********************************************************************************
+ * Controller for catalogue requests                                               *
+ * - "/catalogue/{locationID}" -> retrieves the catalogue for the specific location*
+ * - "/catalogue/complete" -> retrieves the complete catalogue                     *
+ ***********************************************************************************/
+
 package com.stefanobettinelli.productselectionsky.controllers;
 
 import com.stefanobettinelli.productselectionsky.exceptions.CatalogueNotFoundException;
@@ -29,7 +35,7 @@ public class CatalogueRequestController {
     @RequestMapping(value = "/catalogue/{locationID}")
     public Catalogue getCatalogInLocation(@PathVariable String locationID) throws InvalidCatalogueIdException {
 
-        Log.info("Request for location by customer with ID [{}]", locationID);
+        Log.info("Request for catalogue on location ID [{}]", locationID);
 
         Catalogue catalogue = null;
 

@@ -2,6 +2,7 @@ package com.stefanobettinelli.productselectionsky.model;
 
 import java.util.List;
 
+//maps the received pro
 public class SelectedProductsJson {
 
     private List<String> selectedProducts;

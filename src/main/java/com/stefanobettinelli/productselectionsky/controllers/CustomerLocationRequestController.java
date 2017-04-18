@@ -1,3 +1,8 @@
+/***********************************************************************************
+ * Controller for customer location of custumer with id customerID                 *
+ * - "/customer_locations/{customerID}"                                            *
+ ***********************************************************************************/
+
 package com.stefanobettinelli.productselectionsky.controllers;
 
 import com.stefanobettinelli.productselectionsky.exceptions.InvalidCustomerIdException;

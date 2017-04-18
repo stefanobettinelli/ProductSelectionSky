@@ -1,3 +1,7 @@
+/**
+ * Interface for representing data of generic type T
+ */
+
 package com.stefanobettinelli.productselectionsky.dao;
 
 import com.stefanobettinelli.productselectionsky.model.SkyId;

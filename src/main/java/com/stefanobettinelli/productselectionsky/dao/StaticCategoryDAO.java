@@ -1,3 +1,9 @@
+/**
+ * Static container for Category Data
+ * most of the methods and properties are static to test real functionality
+ * developer che implement enetityDAO to retrieve real data from DB or other sources for example
+ */
+
 package com.stefanobettinelli.productselectionsky.dao;
 
 import com.stefanobettinelli.productselectionsky.exceptions.InvalidSkyIdException;
