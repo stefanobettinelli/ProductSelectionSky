@@ -42,7 +42,7 @@ public class SimpleCustomerTest {
         productIdList.add(IntegerSkyId.getNewId(2));
         productIdList.add(IntegerSkyId.getNewId(3));
         productIdList.add(IntegerSkyId.getNewId(100));//The product with id 100 does not exists in the static catalogue
-        testingCustomer.addProductsById(productIdList);
+        testingCustomer.addCollectionOfProductsById(productIdList);
         assertEquals(3, testingCustomer.getSelectedProducts().size());
     }
 

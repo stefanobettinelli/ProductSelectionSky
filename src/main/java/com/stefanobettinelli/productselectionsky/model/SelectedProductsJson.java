@@ -2,7 +2,7 @@ package com.stefanobettinelli.productselectionsky.model;
 
 import java.util.List;
 
-//maps the received pro
+//maps the received json selected product list and custemer ID to this class
 public class SelectedProductsJson {
 
     private List<String> selectedProducts;

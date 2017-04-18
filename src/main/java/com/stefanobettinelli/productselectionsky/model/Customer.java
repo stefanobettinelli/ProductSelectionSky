@@ -12,7 +12,7 @@ public interface Customer {
     Map<SkyId, Product> getSelectedProducts();
     List<Category> getCategoriesOfSelectedProducts();
     void addProduct(Product product);
-    void addProductsById(List<SkyId> products);
+    void addCollectionOfProductsById(List<SkyId> products);
     void removeProduct(Product product);
     String getName();
 }

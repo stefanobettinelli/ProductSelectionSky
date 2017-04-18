@@ -35,7 +35,7 @@ public class SimpleCustomer implements Customer {
         selectedProducts.putIfAbsent(prodID, product);
     }
 
-    public void addProductsById(List<SkyId> products) {
+    public void addCollectionOfProductsById(List<SkyId> products) {
         for (SkyId productId : products) {
             Product product = StaticCatalogueDAO.getProductById(productId);
             if(product != null){
