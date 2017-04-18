@@ -21,9 +21,10 @@ public class IntegerSkyIdTest {
         skyIdD = IntegerSkyId.getNewId(25);
     }
 
-    @Test(expected = InvalidSkyIdException.class)
+    @Test
     public void testInvadIdCreation() throws InvalidSkyIdException {
         SkyId invalidID = IntegerSkyId.getNewId(-1);
+        assertNull(invalidID);
     }
 
     @Test

@@ -29,6 +29,10 @@ public class StaticCategoryDAO implements entityDAO{
         return CATEGORY_MAP;
     }
 
+    public static Category getCategoryById(SkyId id){
+        return CATEGORY_MAP.get(id);
+    }
+
 
     @Override
     public List loadAll() {

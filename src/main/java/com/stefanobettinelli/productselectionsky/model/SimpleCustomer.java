@@ -37,7 +37,10 @@ public class SimpleCustomer implements Customer {
 
     public void addProductsById(List<SkyId> products) {
         for (SkyId productId : products) {
-            selectedProducts.putIfAbsent(productId, StaticCatalogueDAO.getProductById(productId));
+            Product product = StaticCatalogueDAO.getProductById(productId);
+            if(product != null){
+                selectedProducts.putIfAbsent(productId, StaticCatalogueDAO.getProductById(productId));
+            }
         }
     }
 
@@ -70,7 +73,6 @@ public class SimpleCustomer implements Customer {
             Category cat = entry.getValue().getCategory();
             SkyId categoryId = cat.getId();
             categoryMap.putIfAbsent(categoryId, cat);
-            System.out.println(entry.getKey() + "/" + entry.getValue());
         }
 
         return new ArrayList<>(categoryMap.values());

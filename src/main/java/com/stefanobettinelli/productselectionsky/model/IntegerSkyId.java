@@ -21,12 +21,12 @@ public class IntegerSkyId implements SkyId<Integer> {
     }
 
     public static IntegerSkyId getNewId(Integer id){
-        IntegerSkyId integerSkyId;
+        IntegerSkyId integerSkyId = null;
         try {
             integerSkyId = new IntegerSkyId(id);
         } catch (InvalidSkyIdException e) {
             Log.error("Invalid sky id, must >= 0.", e);
-            return null; // TODO check this kind of stacktrace print
+            return null;
         }
         return integerSkyId;
     }

@@ -39,6 +39,7 @@ public class CatalogueRequestController {
             throw new InvalidCatalogueIdException(String.format("Location id '%s' is not valid", locationID));
         } catch (CatalogueNotFoundException e) {
             Log.error("No catalogue found.", e);
+            return null;
         }
 
         return catalogue;
@@ -53,6 +54,7 @@ public class CatalogueRequestController {
             catalogue = catalogueRetrievalService.getCompleteCatalogue();
         } catch (CatalogueNotFoundException e) {
             Log.error("No catalogue found.", e);
+            return null;
         }
 
         return catalogue;

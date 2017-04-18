@@ -4,6 +4,9 @@ import com.stefanobettinelli.productselectionsky.exceptions.InvalidSkyIdExceptio
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class SimpleCustomerTest {
@@ -34,7 +37,13 @@ public class SimpleCustomerTest {
 
     @Test
     public void addProductsById(){
-        fail();
+        List<SkyId> productIdList = new ArrayList<>();
+        productIdList.add(IntegerSkyId.getNewId(1));
+        productIdList.add(IntegerSkyId.getNewId(2));
+        productIdList.add(IntegerSkyId.getNewId(3));
+        productIdList.add(IntegerSkyId.getNewId(100));//The product with id 100 does not exists in the static catalogue
+        testingCustomer.addProductsById(productIdList);
+        assertEquals(3, testingCustomer.getSelectedProducts().size());
     }
 
     @Test
@@ -56,11 +65,6 @@ public class SimpleCustomerTest {
         testingCustomer.removeProduct(prodC);
         int numberOfProducts = testingCustomer.getSelectedProducts().size();
         assertEquals(numberOfProducts, 0);
-    }
-
-    @Test
-    public void checkOut() throws Exception {
-        fail();
     }
 
 }

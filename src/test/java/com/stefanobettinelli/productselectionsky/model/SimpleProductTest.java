@@ -48,7 +48,8 @@ public class SimpleProductTest {
 
     @Test
     public void getCategory() throws Exception {
-        fail();
+        assertNotNull(simpleProductWithLocations.getCategory());
+        assertNotNull(simpleProductNoLocations.getCategory());
     }
 
 }
