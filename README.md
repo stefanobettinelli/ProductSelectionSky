@@ -1,4 +1,5 @@
-#Sky Programming Test
+Sky Programming Test
+====================
 
 This is the implementation of the Sky programming test for the product selection application.
 
